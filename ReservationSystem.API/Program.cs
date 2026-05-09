@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Infrastructure.Persistence;
+using ReservationSystem.Core.Interfaces;
+using ReservationSystem.Infrastructure.Repositories;
 
 namespace ReservationSystem.API
 {
@@ -17,6 +19,7 @@ namespace ReservationSystem.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
